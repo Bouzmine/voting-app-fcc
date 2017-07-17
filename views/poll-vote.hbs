@@ -1,0 +1,41 @@
+<div class="container-fluid">
+	<div class="row text-center">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<h2>{{ name }}</h2>
+			<h4>Vote for one of the below</h4>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+
+	{{#each options}}	
+	<div class="row option">
+		<div class="col-md-12">
+			<a href="/api/vote/{{ ../pollId }}/{{ optionId }}">{{optionName}}</a>
+		</div>
+	</div>
+	{{/each}}
+	
+	{{#if isLoggedIn}}
+	<h3>Not happy with the current options, create your own.</h3>
+	<form action="/api/update/{{ pollId }}" method="post">
+		<input name="optionName" placeholder="My own option" class="form-control"></input>
+		<button type="submit" class="btn btn-default">Create new option and vote for it</button>
+	</form>
+	
+	<a class="twitter-share-button"
+	  href="https://twitter.com/share"
+	  data-text="Go vote on that poll"
+	  data-url="{{url}}">Tweet</a>
+	{{/if}}
+</div>
+
+<style>
+	.option {
+		font-size: 24px;
+		text-align: center;
+		font-weight: bold;
+		
+	}
+	
+</style>

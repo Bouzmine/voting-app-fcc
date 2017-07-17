@@ -1,0 +1,56 @@
+<div class="container-fluid">
+	{{#if isLoggedIn}}
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<a href="/create-poll">
+				<button class="btn btn-primary btn-block">
+					Create a new poll
+				</button>
+			</a>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	{{/if}}
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h2>New poll</h2>
+		</div>
+	</div>
+	
+	<form action="/api/create" method="post" id="form">
+		<div class="form-group">
+			<label for="name">Poll name</label>
+			<input type="text" class="form-control" name="name" placeholder="Your favorite color...">
+		</div>
+		<h4>Options</h4>
+		<div id="options">
+			<input type="text" class="form-control" name="options[0]" placeholder="My option...">
+			<input type="text" class="form-control" name="options[1]" placeholder="My option...">
+		</div>
+		
+		<button class="btn btn-block btn-default" id="addButton" type="button">Add Option</button>
+		
+		<button class="btn btn-primary btn-block" type="submit">Create!</button>
+	</form>
+</div>
+
+<script type="text/javascript">
+	let optionsI = 2;
+	
+	console.log(document.getElementById("addButton"));
+
+	document.getElementById("addButton").addEventListener("click", () => {
+		let form = document.getElementById("options");
+		let input = document.createElement("INPUT");
+		input.className = ["form-control"];
+		input.setAttribute("type", "text");
+		input.setAttribute("name", "options[" + optionsI + "]");
+		input.setAttribute("placeholder", "My option...");
+		form.appendChild(input);
+		
+		console.log("hello");
+		optionsI++;
+	});
+</script>

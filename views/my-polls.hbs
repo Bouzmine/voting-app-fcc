@@ -1,0 +1,38 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<a href="/create-poll">
+				<button class="btn btn-primary btn-block">
+					Create a new poll
+				</button>
+			</a>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h4>My polls</h4>
+		</div>
+	</div>
+	
+	{{#each polls}}	
+	<div class="row poll">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<a href="/poll/{{_id}}">{{name}}</a>
+		</div>
+		<div class="col-md-4"><a href="/api/delete/{{_id}}">Delete</a></div>
+	</div>
+	{{/each}}
+</div>
+
+<style>
+	.poll {
+		font-size: 14px;
+		text-align: center;
+		font-weight: bold;
+	}
+	
+</style>

@@ -1,0 +1,60 @@
+<div class="container-fluid">
+	<div class="row text-center">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<h2>{{ name }}</h2>
+			<h4>Here are the results</h4>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	
+	<canvas id="myChart" width="400" height="400"></canvas>
+	
+	{{#if isLoggedIn}}
+	<a class="twitter-share-button"
+	  href="https://twitter.com/share"
+	  data-text="Go vote on that poll"
+	  data-url="{{url}}">Tweet</a>
+	{{/if}}
+</div>
+
+<style>
+	.option {
+		font-size: 24px;
+		text-align: center;
+		font-weight: bold;
+		
+	}
+	
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
+<script>
+var data = {{{ toJSON options }}};
+
+console.log(data);
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: data.map((val) => val.optionName),
+        datasets: [{
+            label: '# of Votes',
+            data: data.map((val) => val.votes),
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+});
+</script>
